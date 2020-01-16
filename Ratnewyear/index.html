@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <title>HTML5瑞鼠财运过大年</title>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/css/dialog.css">
+    <script src="static/js/rem.js" fu-psd="640" fu-min="40" fu-max="200" fu-full="true"></script>
+    <script src="static/js/zepto.min.js"></script>
+    <!-- <link rel="prerender" href="./images/ratleft.png">
+    <link rel="prerender" href="./img/rice_pudding1.png">
+    <link rel="prerender" href="./img/boast.png"> -->
+
+    <style type="text/css" media="all">
+        @font-face {
+            font-family: "FZShuangQTJW_Zhun";
+            src: url("./static/fonts/FZShuangQTJW_Zhun.TTF")
+        }
+        
+        #wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <!-- 引导页 -->
+        <!-- 首页 -->
+        <div id="guidePanel">
+            <div class="guide-pageTop">
+                <div class="logo">
+                    <div class="logo-left"><img src="./static/images/logo2.png" alt=""></div>
+                    <div class="logo-right"><img src="./static/images/logo1.png" alt=""></div>
+                </div>
+            </div>
+            <div class="logo-banner">
+                <div class="logo-bannerTop"><img src="./static/images/bannersbg.png" alt=""></div>
+                <div class="logo-bannerFooter"><img src="./static/images/title.png" alt=""></div>
+            </div>
+            <div>
+                <div class="guide-pageFooter">
+                    <div class="btn-goldcoins"><img id="startGame" src="./static/images/btngoldcoins.png" alt=""></div>
+                    <div class="btn-gethelp"><img id="showHelp" src="./static/images/btngethelp.png" alt=""></div>
+                    <div class="btn-activitykits"><img id="showRules" src="./static/images/btnactivitykits.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏页 -->
+        <div id="gamepanel">
+            <div id="gamepanel-top">
+                <div class="score-panel">
+                    <img src="" alt="" class="user-icon">
+                    <div class="score-num">
+                        <span id="oScore">得分:</span>
+                        <span id="score">0</span>
+                    </div>
+                </div>
+                <div class="time-panel">
+                    <span class="oTime">时间</span>
+                    <div id="countDown" class="count-down">60S</div>
+                </div>
+                <div class="music-panel">
+                    <img src="./static/images/musicicon.png" alt="" class="music-icon">
+                </div>
+            </div>
+            <div class="startcountdown" id="startcountdown"></div>
+
+            <canvas id="stage" width="750" height="1334"></canvas>
+        </div>
+
+        <!-- 结果页 -->
+        <!-- 挑战成功 -->
+        <div id="resultPanel">
+            <div class="mask"></div>
+            <div class="result-card">
+
+                <div class="result-main">
+                    <div class="wx-account">
+                        <div class="wx-avatar">
+                            <img src="static/img/132.jpg" alt="">
+                        </div>
+                        <span id="gameSuccess">挑战成功</span>
+                    </div>
+                    <div class="game-result">
+                        <p style="margin-top: 0.4rem;margin-bottom: 0.1rem;"><i>您本局接金币：</i><span id="gameScore">111</span></p>
+                        <p style="margin-bottom: 0.2rem;"><i>成功击败全国</i><span id="gameProportion">93%</span><i>的玩家</i></p>
+                        <p style="margin-top: 0.3rem;margin-bottom: 0.1rem;"><i>最佳成绩：</i><span id="gameHeight">333</span></p>
+                        <p style="margin-bottom: 0.2rem;"><i>您的排名：</i><span id="gameRank">NO.222</span></p>
+                    </div>
+
+                    <div class="btn-group">
+                        <a href="javascript:;" id="playAgain" class="playagain"><img src="./static/images/playagain.png" alt="" id="playagainicon"></a>
+                        <a href="javascript:;" id="showHelp0" id="showHelp0"><img src="./static/images/showhelp0.png" alt=""></a>
+                        <a href="javascript:;" id="showCoins" class="showCoins"><img src="./static/images/showcoins.png" alt=""></a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 显示助力页面 -->
+        <div id="helpsPanel">
+            <div class="mask"></div>
+            <div class="helps-card">
+                <div class="helps-top">
+                    <a href="javascript:;" id="closehelpsPanel" class="close-btn"></a>
+                </div>
+                <div class="helps-list">
+                    <ul class="helps-inner">
+                        <li><span>1月17日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月18日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月19日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月20日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月21日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月22日</span><span>20:00:00</span><span>微信昵称</span></li>
+                        <li><span>1月23日</span><span>20:00:00</span><span>微信昵称</span></li>
+                    </ul>
+                </div>
+                <div class="helps-bottom">
+                    <a href="javascript:;" id="gethelps">
+                        <img src="./static/images/gethelps.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 说明页 -->
+        <!-- 活动说明活动锦囊 -->
+        <div id="rulesPanel">
+            <div class="mask"></div>
+            <div class="rules-card">
+                <div class="rules-top">
+                    <a href="javascript:;" id="closeRulePanel" class="close-btn"></a>
+                </div>
+                <div class="rules-main">
+                    <ul class="rules-tab" data-active="intro">
+                        <li style="width:25%" data-id="intro"><span>活动说明</span></li>
+                        <li style="width:25%" data-id="rank"><span>排行榜</span></li>
+                        <li style="width:25%" data-id="mycoin"><span>我的金币</span></li>
+                        <li style="width:25%" data-id="mygift"><span>我的奖品</span></li>
+                    </ul>
+                    <div class="rules-pane intro active" id="rules-pane-card">
+                        <section>
+                            <h5 style="padding-bottom:0.1rem;"><span class="title_prize">活动奖品</span></h5>
+                            <div class="event-prize actprize" style="margin-top:0.1rem">
+                                <p><i>一等奖</i><b>2个</b><span>价值3099元海尔破壁机一台</span></p>
+                                <p><i>二等奖</i><b>6个</b><span>价值1158元罗莱男女家居袍套装</span></p>
+                                <p><i>三等奖</i><b>10个</b><span>价值399元特美刻梵高套装保温杯</span></p>
+                                <p><i>四等奖</i><b>18个</b><span>价值398元湖畔居茶具</span></p>
+                                <p><i>五等奖</i><b>30个</b><span>价值3099元特美刻双层不锈钢保温壶</span></p>
+                            </div>
+                        </section>
+                        <section class="flex flex-center">
+                            <h5><span class="title_time">活动时间</span></h5>
+                            <p style="margin-left:0.1rem;margin-top:0.2rem;font-size: 0.3rem;">2020年1月17日-2月8日</p>
+                        </section>
+                        <section class="flex flex-center">
+                            <h5><span class="title_organizer">活动规则</span></h5>
+                            <div class="event-prize actorganizer" style="margin-top:0.1rem">
+                                <p style="margin-left:0.1rem;">1、在规定时间内接住天上掉下来的金币、福包、红包，接的越多，分数越高；接到时钟可延长游戏时间2s，接到炸弹本轮游戏终止。</p>
+                                <p style="margin-left:0.1rem;">2、每轮游戏的分数等量累计为个人金币，可兑换等额的新年礼品，礼品数量有限，先到先得（每人仅有一次兑奖的机会）。</p>
+                                <p style="margin-left:0.1rem;">3、排行榜实时更新，自动记录最高分。</p>
+                                <p style="margin-left:0.1rem;">4、游戏分享好友助力，助力双方都讲增加2次游戏机会（每个好友每日仅可助力一次，每日最多可邀请20个好友助力），每日剩余游戏次数不会累计。</p>
+                                <p style="margin-left:0.1rem;">5、奖品将在活动结束后统一邮寄。</p>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- 排行榜 -->
+                    <div class="rules-pane rank">
+                        <div class="rank-card">
+                            <div class="rank-top">排行榜：仅显示前100名选手</div>
+                            <div class="ranktitle">
+                                <span>排行</span>
+                                <span>头像</span>
+                                <span>昵称</span>
+                                <span>分数</span>
+                            </div>
+                            <div id="wrapper" class="rank-list" style="height:3.8rem;">
+
+                                <ul id="scroller" class="rank-inner">
+                                    <li>
+                                        <span class="label">NO.1</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">小小的僖僖xixidongfong</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.2</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.3</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">Docker</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.3</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">Docker</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.1</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">小小的僖僖xixidongfong</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.2</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.3</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">Docker</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.3</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">Docker</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.4</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">匆匆的巧克力</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.5</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                    <li>
+                                        <span class="label">NO.6</span>
+                                        <span class="avatar"><img src="static/img/cat2_200.jpg"></span>
+                                        <span class="text">蹲地猫</span>
+                                        <span class="score">12</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 我的金币 -->
+                    <div class="rules-pane mycoin">
+                        <div class="mycoin-card">
+                            <div class="mycoin-top">
+                                <fieldset class="fieldset">
+                                    <legend>金币累计</legend>
+                                    <span id="coinNums">3662</span>
+                                </fieldset>
+                            </div>
+                            <div class="mycoin-section">
+                                <span>金币明细</span>
+                                <div class="gold-list">
+                                    <ul class="gold-inner">
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                        <li>
+                                            <span>2020年1月10日</span>
+                                            <span>12:00:00</span>
+                                            <span>+1000</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 我的奖品 -->
+                    <div class="rules-pane mygift">
+                        <div class="mygift-card">
+                            <div class="gift-top">
+                                <span><i>活动</i><i>奖品</i></span>
+                                <span><i>兑换</i><i>金币</i></span>
+                                <span><i>剩余</i><i>奖品数量</i></span>
+                                <span><i>是否</i><i>兑换</i></span>
+                            </div>
+                            <div class="gift-section">
+                                <section>
+                                    <span>一等奖</span>
+                                    <span>169，999</span>
+                                    <span>10</span>
+                                    <span><a href="javascript:;" id="gift1" class="prize-btn"><img src="./static/images/giftbtn.png" alt=""></a></span>
+                                </section>
+                                <section>
+                                    <span>二等奖</span>
+                                    <span>139，999</span>
+                                    <span>30</span>
+                                    <span><a href="javascript:;" id="gift2" class="prize-btn"><img src="./static/images/giftbtn.png" alt=""></a></span>
+                                </section>
+                                <section>
+                                    <span>三等奖</span>
+                                    <span>109，999</span>
+                                    <span>50</span>
+                                    <span><a href="javascript:;" id="gift3" class="prize-btn"><img src="./static/images/giftbtn.png" alt=""></a></span>
+                                </section>
+                                <section>
+                                    <span>四等奖</span>
+                                    <span>89，999</span>
+                                    <span>80</span>
+                                    <span><a href="javascript:;" id="gift4" class="prize-btn"><img src="./static/images/giftbtn.png" alt=""></a></span>
+                                </section>
+                                <section>
+                                    <span>五等奖</span>
+                                    <span>69，999</span>
+                                    <span>100</span>
+                                    <span><a href="javascript:;" id="gift5" class="prize-btn"><img src="./static/images/giftbtn.png" alt=""></a></span>
+                                </section>
+                            </div>
+                            <div class="gift-img">
+                                <img src="./static/images/giftimg.png" alt="">
+                            </div>
+                            <span class="gift-ps">
+                              注：奖品将在活动结束后统一邮寄。
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- 奖品页 -->
+        <div id="giftShowPanel">
+            <div class="mask"></div>
+            <div class="giftShow-card">
+                <div class="giftShow-top">
+                    <a href="javascript:;" id="closegiftShowPanel" class="close-btn"></a>
+                </div>
+                <div class="giftShow-main">
+                    <div class="giftShow-mainTop">
+                        <span>五等奖</span><span>价值3099元特美刻双层不锈钢保温壶</span>
+                    </div>
+                    <img src="./static/images/gift5.png" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 领取奖品页 -->
+        <div id="prizePanel">
+            <div class="mask"></div>
+            <div class="prize-card" id="prize-card">
+                <div class="prize-top">
+                    <a href="javascript:;" id="closePrizePanel" class="close-btn"></a>
+                </div>
+                <div class="prize-main">
+                    <div class="prize-form" style="position: relative;">
+                        <p><label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label><input id="userName" type="text" class="prize-form-input"></p>
+                        <p><label>联系电话：</label><input id="userMobile" type="number" class="prize-form-input">
+                        </p>
+                        <p><label>图片验证码:</label><input id="imgRemarks" type="text" style="width: 40%;" class="prize-form-input">
+                            <i id="imgbtninfo" class="imgbtninfo"><img src="" alt=""></i>
+                        </p>
+                        <p><label> 验&nbsp;证&nbsp;码：</label><input id="userRemarks" type="text" style="width: 40%;" class="prize-form-input"><input type="button" value="获取验证码" id="btninfo" class="btninfo">
+                        </p>
+                        <p><label>收货地址：</label><input id="userAddress" type="text" class="prize-form-input"></p>
+
+                    </div>
+                    <a href="javascript:;" id="btnSubmit" class="submit-btn">确&nbsp;认&nbsp;提&nbsp;交</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/iscroll.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src="static/js/iphone.js"></script>
+    <!--dialog插件-->
+    <script src="static/js/dialog/ripple.js"></script>
+    <script src="static/js/dialog/tapEvent.js"></script>
+    <script src="static/js/dialog/dialog.js"></script>
+
+</body>
+
+</html>
