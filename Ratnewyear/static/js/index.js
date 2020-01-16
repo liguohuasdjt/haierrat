@@ -563,7 +563,7 @@ var gameMonitor = {
                 _this.countDown();
                 clearInterval(test)
             }
-        }, 16)
+        }, 1000)
 
     },
     rollBg: function(ctx) {
@@ -609,11 +609,11 @@ var gameMonitor = {
         _this.genorateFood();
 
         //绘制福包
-        debugger
+        //debugger
         for (i = _this.foodList.length - 1; i >= 0; i--) {
             var f = _this.foodList[i];
             if (f) {
-                f.paint(ctx);
+                //f.paint(ctx);
                 f.move(ctx);
             }
 
